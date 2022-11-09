@@ -4,52 +4,51 @@
 
 {% block body %}
 
+    <h1>Tableaux</h1>
 
-    <div class="example-wrapper">
-        <h1>Tableaux</h1>
-
-        <h2>Tableau de nombres aléatoires</h2>
-        <table>
-            <tr>
-                <td><script>math.random()</script></td>
-                <td>shot</td>
-            </tr>
-            <tr>
-                <td>mass</td>
-                <td>welcome</td>
-            </tr>
-            <tr>
-                <td>victory</td>
-                <td>noon</td>
-            </tr>
-        </table>
-
-        <h2>Tableau de string</h2>
-        <table>
-            <tr>
-                <td>potato></td>
-                <td>shot</td>
-            </tr>
-            <tr>
-                <td>mass</td>
-                <td>welcome</td>
-            </tr>
-            <tr>
-                <td>victory</td>
-                <td>noon</td>
-            </tr>
-            <tr>
-                <td>happy</td>
-                <td>consonant</td>
-            </tr>
-            <tr>
-                <td>becoming</td>
-                <td>object</td>
-            </tr>
-            <tr>
-                <td>machinery</td>
-                <td>there</td>
-            </tr>
-        </table>
-    </div>
+    <h2>Tableau de nombres aléatoires</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="row">Aléatoires</th>
+            <td>Pairs</td>
+            <td>Impairs</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>2</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    </br>
+    <h2>Tableau de strings</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="row">Pays</th>
+            <td>Légumes</td>
+            <td>Voitures</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Espagne</th>
+            <td>Navet</td>
+            <td>Nissan</td>
+        </tr>
+        <tr style="display:none">
+            <th scope="row">Chili</th>
+            <td>Haricot</td>
+            <td>Toyota</td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}
