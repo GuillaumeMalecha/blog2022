@@ -4,27 +4,22 @@
 
 {% block body %}
 
+{% set tableNb = triNb %}
+
     <h1>Tableaux</h1>
 
     <h2>Tableau de nombres aléatoires</h2>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="row">Aléatoires</th>
-            <td>Pairs</td>
-            <td>Impairs</td>
+            <th scope="row">Nombres aléatoires : {{ tableNb|length }}</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <th scope="row">1</th>
-            <td></td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>2</td>
-            <td></td>
+            {% for nb in tableNb %}
+                <td>{{ nb }}</td>
+            {% endfor %}
         </tr>
         </tbody>
     </table>

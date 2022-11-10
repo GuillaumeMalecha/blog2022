@@ -8,6 +8,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+
+    static function triNb($nb): array
+    {
+        $table = [];
+
+        for($i = 0 ; $i < $nb ; $i++){
+            $alea = rand(0,99);
+
+            if(fmod($alea, 2) == 0){
+                array_unshift($table,$alea);
+
+            }else{
+                $table[] = $alea;
+            }
+        }
+        return $table;
+    }
+
+
     /**
      * @Route("/article", name="app_article")
      */
@@ -23,8 +42,10 @@ class ArticleController extends AbstractController
      */
     public function tableau(): Response
     {
+        $tableTri = self::triNb(10);
         return $this->render('article/tableau.html.twig', [
             'controller_name' => 'ArticleController',
+            'triNb' => $tableTri,
         ]);
     }
 }
