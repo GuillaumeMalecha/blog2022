@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% set numero = numArticle %}
+
+{% block title %}Article numéro {{ numero }} {% endblock %}
+
+{% block body %}
+
+    <h2>L'article numéro {{ numero }}</h2>
+    <p>Nullam quis risus eget <a href="{{ path ('app_article') }}">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis
+        parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+
+    <img src="https://picsum.photos/500/300">
+
+
+    <figure>
+        <blockquote class="blockquote">
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Quelqu'un d'inspiré, <cite title="Source Title">Article{{ numero }}</cite>
+        </figcaption>
+    </figure>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab enim explicabo illum laudantium nihil obcaecati
+        perferendis quaerat, quod reprehenderit voluptate! Accusantium, obcaecati, tempore! Dolores est fugiat iure
+        quibusdam sint. In?</p>
+
+{% endblock %}

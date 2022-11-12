@@ -38,6 +38,18 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/article/{numero}", name="afficher_article")
+     */
+
+    public function afficher($numero): Response
+    {
+        return $this->render('article/article.html.twig', [
+            'controller_name' => 'ArticleController',
+            'numArticle' => $numero,
+        ]);
+    }
+
+    /**
      * @Route("/tableau", name="app_tableau")
      */
     public function tableau(): Response

@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Index des articles{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Bienvenue</h1>
+    <h2>Veuillez sélectionner un article </h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/guill/Symfony/blog2022/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/guill/Symfony/blog2022/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'1'}) }}">1</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'2'}) }}">2</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'3'}) }}">3</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'4'}) }}">4</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'5'}) }}">5</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'6'}) }}">6</a>
+            <a type="button" class="btn btn-secondary" href="{{ path ('afficher_article', {numero:'7'}) }}">7</a>
+
+        </div>
+    </div>
+
 {% endblock %}
