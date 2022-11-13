@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -59,5 +60,20 @@ class ArticleController extends AbstractController
             'controller_name' => 'ArticleController',
             'triNb' => $tableTri,
         ]);
+    }
+
+    /**
+     * @Route("/article/{numero}/vote/{direction}")
+     */
+
+    public function vote($numero, $direction)
+    {
+        if ($direction === 'up') {
+            $compteVote = rand(7, 99);
+        } else {
+            $compteVote = rand(0, 5);
+        }
+
+        return new JsonResponse(['votes' => $compteVote]);
     }
 }

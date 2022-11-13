@@ -10,14 +10,13 @@
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}"/>
     {% endblock %}
 
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Blog22</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
@@ -35,11 +34,21 @@
     </div>
 </nav>
 
-<body class="is-justify-content-center">
+<body>
 
 {% block body %}{% endblock %}
 </body>
 <footer>
     <p class="footer">Projet Blog 2022 - GM</p>
 </footer>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/2a28a73a8e.js" crossorigin="anonymous"></script>
+
+{% endblock %}
 </html>
