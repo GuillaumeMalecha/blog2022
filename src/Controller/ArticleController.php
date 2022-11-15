@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,16 @@ class ArticleController extends AbstractController
             }
         }
         return $table;
+    }
+
+
+    static function stringTab($nb){
+        $faker = Factory::create();
+        $tab = [];
+        for ($i = 0 ; $i < $nb ; $i++){
+            $tab[] = $faker->word();
+        }
+        return $tab;
     }
 
 
@@ -59,6 +70,12 @@ class ArticleController extends AbstractController
         return $this->render('article/tableau.html.twig', [
             'controller_name' => 'ArticleController',
             'triNb' => $tableTri,
+        ]);
+
+        $stringTab = self::stringTab(10);
+        return $this->render('article/tableau.html.twig', [
+            'controller_name' => 'ArticleController',
+            'stringTab' => $stringTab,
         ]);
     }
 

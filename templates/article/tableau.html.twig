@@ -24,26 +24,10 @@
         </tbody>
     </table>
     </br>
+
+{% set stringTab = stringTab %}
+
     <h2>Tableau de strings</h2>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="row">Pays</th>
-            <td>Légumes</td>
-            <td>Voitures</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">Espagne</th>
-            <td>Navet</td>
-            <td>Nissan</td>
-        </tr>
-        <tr style="display:none">
-            <th scope="row">Chili</th>
-            <td>Haricot</td>
-            <td>Toyota</td>
-        </tr>
-        </tbody>
-    </table>
+    <span class="table table-hover">{{ stringTab }}</span>
+
 {% endblock %}
