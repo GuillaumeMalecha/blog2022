@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
+use Faker\Provider\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Article;
 
 class ArticleController extends AbstractController
 {
@@ -92,5 +95,23 @@ class ArticleController extends AbstractController
         }
 
         return new JsonResponse(['votes' => $compteVote]);
+    }
+
+    /**
+     * @Route("/newarticle", name="new")
+     */
+
+    public function new(EntityManagerInterface $entityManager)
+    {
+
+        $article = new Article();
+        $article->setTitre('Mon article aléatoire');
+        $article->setContenu('Nullam id dolor id nibh ultricies vehicula. Nullam quis risus eget.');
+        $article->setDateCreation(DateTime::dateTime());
+        //$article->setDateCreation(DateTime::dateTimeBetween('-1 years', '-11 months'));
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return $this->render('article/newarticle.html.twig');
     }
 }
