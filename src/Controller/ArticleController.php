@@ -114,4 +114,21 @@ class ArticleController extends AbstractController
 
         return $this->render('article/newarticle.html.twig');
     }
+
+    /**
+     * @Route("/article/affichage/{id}", name="affichageid")
+     */
+
+    public function affichageid($id, EntityManagerInterface $entityManager)
+    {
+        $repository = $entityManager->getRepository(Article::class);
+
+        $article = $repository->find($id);
+
+        return $this->render('article/affichage.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+
 }

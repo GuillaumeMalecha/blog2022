@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage d'un article{% endblock %}
+
+{% block body %}
+
+    <h1>Article : {{ article.title }}! </h1>
+    <h4>Auteur : {{ article.author.username }}  </h4>
+    <h4>Date de création : {{ article.createdAt|date("d/m/Y") }}! </h4>
+    <p>Contenu : {{ article.content }}! </p>
+
+
+{% endblock %}
