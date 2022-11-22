@@ -4,10 +4,10 @@
 
 {% block body %}
 
-    <h1>Article : {{ article.title }}! </h1>
-    <h4>Auteur : {{ article.author.username }}  </h4>
-    <h4>Date de création : {{ article.createdAt|date("d/m/Y") }}! </h4>
-    <p>Contenu : {{ article.content }}! </p>
+    <h1>Article : {{ article.title }} </h1>
+    <h2>Auteur : {{ article.author.username }}  </h2>
+    <h3>Date de création : {{ article.createdAt|date("d/m/Y") }} </h3>
+    <p>Contenu : {{ article.content }} </p>
 
 
 {% endblock %}

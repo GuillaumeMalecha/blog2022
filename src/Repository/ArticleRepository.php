@@ -39,6 +39,24 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findByYear($year)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.dateCreation like :year')
+            ->setParameter('year', $year.'%')
+            ->orderBy('a.dateCreation', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

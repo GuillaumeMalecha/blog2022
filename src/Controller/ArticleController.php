@@ -116,14 +116,28 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/affichage/{id}", name="affichageid")
+     * @Route("/article/show/{id}", name="showById")
      */
 
-    public function affichageid($id, EntityManagerInterface $entityManager)
+    public function showById($id, EntityManagerInterface $entityManager)
     {
         $repository = $entityManager->getRepository(Article::class);
 
         $article = $repository->find($id);
+
+        return $this->render('article/affichage.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
+
+    /**
+     * @Route("/article/show/{year}", name="showByYear")
+     */
+    public function showByYear($year, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Article::class);
+        $article = $repository->findByYear($year);
 
         return $this->render('article/affichage.html.twig', [
             'article' => $article,
