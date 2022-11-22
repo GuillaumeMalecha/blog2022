@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage d'un article{% endblock %}
+
+{% block body %}
+
+    {% for article in articles %}
+
+        <h1>Article : {{ article.titre }} </h1>
+        <h4>Date de rédaction : {{ article.dateCreation|date("d/m/Y") }} </h4>
+        <p>Contenu : {{ article.contenu }} </p>
+
+    {% endfor %}
+
+
+{% endblock %}

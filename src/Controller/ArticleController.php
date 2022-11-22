@@ -5,6 +5,7 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Faker\Provider\DateTime;
+use Faker\Provider\Text;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,7 +104,6 @@ class ArticleController extends AbstractController
 
     public function new(EntityManagerInterface $entityManager)
     {
-
         $article = new Article();
         $article->setTitre('Mon article aléatoire');
         $article->setContenu('Nullam id dolor id nibh ultricies vehicula. Nullam quis risus eget.');
@@ -125,24 +125,34 @@ class ArticleController extends AbstractController
 
         $article = $repository->find($id);
 
-        return $this->render('article/affichage.html.twig', [
+        return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
 
 
     /**
-     * @Route("/article/show/{year}", name="showByYear")
+     * @Route("/article/showyear/{year}", name="showByYear")
      */
     public function showByYear($year, EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Article::class);
-        $article = $repository->findByYear($year);
+        $articles = $repository->findByYear($year);
 
-        return $this->render('article/affichage.html.twig', [
-            'article' => $article,
+        return $this->render('article/showmulti.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
 
+    /**
+     * @Route("/article/afficher/{id}", name="afficherById")
+     */
+    public function afficherById(Article $article): Response
+    {
+
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }
