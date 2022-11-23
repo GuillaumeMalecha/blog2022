@@ -8,6 +8,7 @@ use Faker\Provider\DateTime;
 use Faker\Provider\Text;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
@@ -19,13 +20,13 @@ class ArticleController extends AbstractController
     {
         $table = [];
 
-        for($i = 0 ; $i < $nb ; $i++){
-            $alea = rand(0,99);
+        for ($i = 0; $i < $nb; $i++) {
+            $alea = rand(0, 99);
 
-            if(fmod($alea, 2) == 0){
-                array_unshift($table,$alea);
+            if (fmod($alea, 2) == 0) {
+                array_unshift($table, $alea);
 
-            }else{
+            } else {
                 $table[] = $alea;
             }
         }
@@ -33,10 +34,11 @@ class ArticleController extends AbstractController
     }
 
 
-    static function stringTab($nb){
+    static function stringTab($nb)
+    {
         $faker = Factory::create();
         $tab = [];
-        for ($i = 0 ; $i < $nb ; $i++){
+        for ($i = 0; $i < $nb; $i++) {
             $tab[] = $faker->word();
         }
         return $tab;
@@ -155,4 +157,14 @@ class ArticleController extends AbstractController
             'article' => $article,
         ]);
     }
+
+    /**
+     * @Route("/article/{id}/voter", name="article_vote", methods="POST")
+     */
+    public function articleVote(Article $article, Request $request)
+    {
+
+
+    }
+
 }
