@@ -106,9 +106,13 @@ class ArticleController extends AbstractController
 
     public function new(EntityManagerInterface $entityManager)
     {
+        $faker = Factory::create('fr_FR');
+        $titre = $faker->words(3, true);
+        $contenu = $faker->paragraph(6);
+
         $article = new Article();
-        $article->setTitre('Mon article aléatoire');
-        $article->setContenu('Nullam id dolor id nibh ultricies vehicula. Nullam quis risus eget.');
+        $article->setTitre($titre);
+        $article->setContenu($contenu);
         $article->setDateCreation(DateTime::dateTime());
         //$article->setDateCreation(DateTime::dateTimeBetween('-1 years', '-11 months'));
         $entityManager->persist($article);
@@ -129,6 +133,19 @@ class ArticleController extends AbstractController
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/article/show/select/{content}", name="showByContent")
+     */
+    public function showByContent($content, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Article::class);
+        $articles = $repository->findByContent($content);
+
+        return $this->render('article/showmulti.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
@@ -161,8 +178,22 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}/voter", name="article_vote", methods="POST")
      */
-    public function articleVote(Article $article, Request $request)
+    public function articleVote(Article $article, Request $request, EntityManagerInterface $entityManager)
     {
+        $direction = $request->request->get('direction');
+
+        if ($direction === 'up') {
+        // $article->setVotes($article->getVotes() + 1);
+            $article->upVote();
+        } elseif ($direction === 'down') {
+        // $article->setVotes($article->getVotes() - 1);
+            $article->downVote();
+        }
+        $entityManager->flush();
+
+        return $this->redirectToRoute('afficherById', [
+            'id' => $article->getId()
+        ]);
 
 
     }
