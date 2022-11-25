@@ -6,9 +6,12 @@
 
     {% for article in articles %}
 
-        <h1>Article : {{ article.titre }} </h1>
-        <h4>Date de rédaction : {{ article.dateCreation|date("d/m/Y") }} </h4>
+        <a class="btn btn-primary" href="{{ path('afficherById', { id: article.id }) }}">
+        <h4>Article : {{ article.titre }} </h4></a>
+        <h5>Date de rédaction : {{ article.dateCreation|date("d/m/Y") }} </h5>
         <p>Contenu : {{ article.contenu }} </p>
+        <span><p>Votes de l'article : {{ article.votesString }}</p></span>
+        <br>
 
     {% endfor %}
 

@@ -39,7 +39,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-
+    //Recherche les articles par année
     /**
      * @return Article[] Returns an array of Article objects
      */
@@ -55,7 +55,7 @@ class ArticleRepository extends ServiceEntityRepository
             ;
     }
 
-
+    //Recherche les articles par contenu
     /**
      * @return Article[] Returns an array of Article objects
      */
@@ -73,21 +73,20 @@ class ArticleRepository extends ServiceEntityRepository
 
 
 
-
-//    /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findAllYears($value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.dateCreation like :year')
+            ->setParameter('year', $value)
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Article
 //    {

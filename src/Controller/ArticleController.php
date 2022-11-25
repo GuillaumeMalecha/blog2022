@@ -15,7 +15,7 @@ use App\Entity\Article;
 
 class ArticleController extends AbstractController
 {
-
+    //Fonction gérant le tri des nombres pairs et impairs
     static function triNb($nb): array
     {
         $table = [];
@@ -33,7 +33,7 @@ class ArticleController extends AbstractController
         return $table;
     }
 
-
+    //Fonction générant des mots aléatoires
     static function stringTab($nb)
     {
         $faker = Factory::create();
@@ -44,7 +44,7 @@ class ArticleController extends AbstractController
         return $tab;
     }
 
-
+    //Liste des articles générés en dehors de la db
     /**
      * @Route("/article", name="app_article")
      */
@@ -55,6 +55,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Affichage d'un article qui n'existe pas en db
     /**
      * @Route("/article/{numero}", name="afficher_article")
      */
@@ -67,6 +68,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Affichage des tableaux
     /**
      * @Route("/tableau", name="app_tableau")
      */
@@ -85,6 +87,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Gestion des votes factices des articles hors db
     /**
      * @Route("/article/{numero}/vote/{direction}")
      */
@@ -100,6 +103,8 @@ class ArticleController extends AbstractController
         return new JsonResponse(['votes' => $compteVote]);
     }
 
+
+    //Générer un nouvel article en db avec faker
     /**
      * @Route("/newarticle", name="new")
      */
@@ -121,6 +126,21 @@ class ArticleController extends AbstractController
         return $this->render('article/newarticle.html.twig');
     }
 
+    //Lister tous les articles en db
+    /**
+     * @Route("/allarticles", name="allArticles")
+     */
+    public function article(EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Article::class);
+        $listeArticles =  $repository->findAll();
+
+        return $this->render('article/showmulti.html.twig', [
+            'articles' => $listeArticles
+        ]);
+    }
+
+    //Afficher un article via son id
     /**
      * @Route("/article/show/{id}", name="showById")
      */
@@ -136,6 +156,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Lister les articles contenant un mot passé en paramètre
     /**
      * @Route("/article/show/select/{content}", name="showByContent")
      */
@@ -149,7 +170,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
+    //Lister les articles par année
     /**
      * @Route("/article/showyear/{year}", name="showByYear")
      */
@@ -163,7 +184,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
+    //Afficher un article via son id
     /**
      * @Route("/article/afficher/{id}", name="afficherById")
      */
@@ -175,6 +196,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //Gestion du système de vote des articles
     /**
      * @Route("/article/{id}/voter", name="article_vote", methods="POST")
      */
