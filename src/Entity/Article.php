@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Article
      * @ORM\Column(type="integer")
      */
     private $votes = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="article")
+     */
+    private $categorie;
+
+    public function __construct()
+    {
+        $this->categorie = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -106,6 +118,36 @@ class Article
     public function downVote(): self
     {
         $this->votes--;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+            $categorie->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        if ($this->categorie->removeElement($categorie)) {
+            // set the owning side to null (unless already changed)
+            if ($categorie->getArticle() === $this) {
+                $categorie->setArticle(null);
+            }
+        }
+
         return $this;
     }
 

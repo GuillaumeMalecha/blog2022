@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Faker\Provider\DateTime;
@@ -219,5 +220,7 @@ class ArticleController extends AbstractController
 
 
     }
+
+
 
 }

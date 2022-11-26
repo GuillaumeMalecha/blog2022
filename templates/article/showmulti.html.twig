@@ -4,6 +4,9 @@
 
 {% block body %}
 
+    <h2> Vos articles :</h2>
+    <br>
+
     {% for article in articles %}
 
         <a class="btn btn-primary" href="{{ path('afficherById', { id: article.id }) }}">
