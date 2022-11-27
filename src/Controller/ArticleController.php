@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Form\ArticleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Faker\Provider\DateTime;
-use Faker\Provider\Text;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -221,6 +221,29 @@ class ArticleController extends AbstractController
 
     }
 
+    /**
+     * @Route("/addarticle", name="addArticle")
+     */
+    public function add(Request $request): Response
+    {
+        $article = new Article();
+        $article->setDateCreation(DateTime::dateTime());
+        $form = $this->createForm(ArticleType::class, $article);
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            return $this->redirectToRoute('afficherById', [
+                'id' => $article->getId()
+            ]);
+        }
+
+        return $this->render('article/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 }
